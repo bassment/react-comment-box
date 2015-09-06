@@ -1,12 +1,12 @@
-var React = require('react');
-var Comment = require('./Comment.jsx');
+import React, {Component} from 'react';
+import Comment from './Comment.jsx';
 
-var CommnetList = React.createClass({
+export default class CommentList extends Component {
 
-  render: function() {
-    var commentNodes = this.props.data.map(function (comment) {
+  render() {
+    var commentNodes = this.props.data.map((comment, index) => {
       return (
-        <Comment author={comment.author}>
+        <Comment key={index} author={comment.author}>
           {comment.text}
         </Comment>
       );
@@ -17,7 +17,4 @@ var CommnetList = React.createClass({
       </div>
     );
   }
-
-});
-
-module.exports = CommnetList;
+}

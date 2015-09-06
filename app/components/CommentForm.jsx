@@ -1,16 +1,25 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
+import React, {Component} from 'react';
 
-var CommentForm = React.createClass({
-
-  render: function() {
+export default class CommentForm extends Component {
+  handleSubmit(e) {
+    e.preventDefault();
+    var author = this.refs.author.getDOMNode().value;
+    var text = this.refs.text.getDOMNode().value;
+    if (!text || !author) {
+      return;
+    }
+    this.props.add({author: author, text: text});
+    this.refs.author.getDOMNode().value = '';
+    this.refs.text.getDOMNode().value = '';
+    return;
+  }
+  render() {
     return (
-      <div className='commentForm'>
-        Hello! I'm comment form!
-      </div>
+      <form className="commentForm" onSubmit={this.handleSubmit.bind(this)}>
+        <input type="text" placeholder="Your name" ref='author' />
+        <input type="text" placeholder="Say something..." ref='text' />
+        <input type="submit" value="Post" />
+      </form>
     );
   }
-
-});
-
-module.exports = CommentForm;
+}
