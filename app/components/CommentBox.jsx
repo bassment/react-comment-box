@@ -31,11 +31,19 @@ export default class CommentBox extends Component{
     });
   }
 
+  handleRemoveItem(index) {
+    var newData = this.state.data;
+    newData.splice(index, 1);
+    this.setState({
+      data: newData
+    });
+  }
+
   render() {
     return (
       <div className='commentBox'>
         <h1>Comments:</h1>
-        <CommentList data={this.state.data} />
+        <CommentList data={this.state.data} remove={this.handleRemoveItem.bind(this)} />
         <CommentForm add={this.handleAddItem.bind(this)} />
       </div>
     );
